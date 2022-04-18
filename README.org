@@ -1,5 +1,6 @@
 # This file:
 #   https://github.com/edrx/pict2e-lua/
+#   https://github.com/edrx/pict2e-lua/#introduction
 #       http://angg.twu.net/pict2e-lua/README.org.html
 #       http://angg.twu.net/pict2e-lua/README.org
 #               (find-angg "pict2e-lua/README.org")
@@ -72,7 +73,7 @@ report if the compilation went well - and if the compilation worked we
 can make Emacs display the PDF by typing a single key. See the
 screenshot below:
 
-@@html:<a href="2022agda-mode-prop.png"><IMG SRC="2022agda-mode-prop-small.png"></a>@@
+@@html:<a href="2022-pict2e-lua.png"><IMG SRC="2022-pict2e-lua-small.png"></a>@@
 
 Future versions of this package will support [[https://github.com/edrx/emlua/#introduction][emlua]], and use it to make
 Emacs display the new PDF as sson as it gets ready; and they will also
@@ -96,8 +97,8 @@ sudo apt-get install texlive-base lua5.1
  (eepitch-shell)
  (eepitch-kill)
  (eepitch-shell)
-cp -iv ~/IMAGES/2022agda-mode-prop.png .
-cp -iv ~/IMAGES/2022agda-mode-prop-small.png .
+cp -iv ~/IMAGES/2022-pict2e-lua.png .
+cp -iv ~/IMAGES/2022-pict2e-lua-small.png .
 cp -v  ~/LUA/Pict2e1.lua   .
 cp -v  ~/LUA/Pict2e1-1.lua .
 cp -v  ~/LUA/lua50init.lua edrxlib.lua
@@ -105,8 +106,8 @@ cp -v  ~/LUA/lua50init.lua edrxlib.lua
 laf
 git add README.org README.html README.md
 git add Pict2e1.lua Pict2e1-1.lua edrxlib.lua
-git add 2022agda-mode-prop.png
-git add 2022agda-mode-prop-small.png
+git add 2022-pict2e-lua.png
+git add 2022-pict2e-lua-small.png
 git add .gitignore
 
 #+end_comment

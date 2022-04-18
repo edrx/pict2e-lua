@@ -19,7 +19,7 @@ report if the compilation went well - and if the compilation worked we
 can make Emacs display the PDF by typing a single key. See the
 screenshot below:
 
-<a href="2022agda-mode-prop.png"><IMG SRC="2022agda-mode-prop-small.png"></a>
+<a href="2022-pict2e-lua.png"><IMG SRC="2022-pict2e-lua-small.png"></a>
 
 Future versions of this package will support [emlua](https://github.com/edrx/emlua/#introduction), and use it to make
 Emacs display the new PDF as sson as it gets ready; and they will also
