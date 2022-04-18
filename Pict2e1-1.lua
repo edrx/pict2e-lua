@@ -9,7 +9,7 @@
 --      (find-sh0 "cp -v ~/LUA/Pict2e1-1.lua   ~/LATEX/Pict2e1-1.lua")
 --
 -- Author: Eduardo Ochs <eduardoochs@gmail.com>
--- Version: 2022apr13
+-- Version: 2022apr18
 --
 -- Tests for Pict2e1.lua that use functions that don't need to be in
 -- the core.
@@ -19,10 +19,22 @@
 -- (defun ab () (interactive) (find-2b '(a) '(b)))
 -- (defun et () (interactive) (find-angg "LATEX/2022pict2e.tex"))
 -- (defun eb () (interactive) (find-angg "LATEX/2022pict2e-body.tex"))
--- (defun o  () (interactive) (find-angg "LATEX/2022pict2e.lua"))
+-- (defun ao () (interactive) (find-angg "LATEX/2022pict2e.lua"))
 -- (defun v  () (interactive) (find-pdftools-page "~/LATEX/2022pict2e.pdf"))
 -- (defun tb () (interactive) (find-ebuffer (eepitch-target-buffer)))
 -- (defun etv () (interactive) (find-wset "13o2_o_o" '(tb) '(v)))
+-- (setenv "PICT2ELUADIR" "~/LATEX/")
+--
+-- (code-c-d "pict2elua" "/tmp/pict2e-lua/" :anchor)
+-- (defun a  () (interactive) (find-pict2elua "Pict2e1.lua"))
+-- (defun b  () (interactive) (find-pict2elua "Pict2e1-1.lua"))
+-- (defun ab () (interactive) (find-2b '(a) '(b)))
+-- (defun et () (interactive) (find-pict2elua "2022pict2e.tex"))
+-- (defun eb () (interactive) (find-pict2elua "2022pict2e-body.tex"))
+-- (defun v  () (interactive) (find-pdftools-page "/tmp/pict2e-lua/2022pict2e.pdf"))
+-- (defun tb () (interactive) (find-ebuffer (eepitch-target-buffer)))
+-- (defun etv () (interactive) (find-wset "13o2_o_o" '(tb) '(v)))
+-- (setenv "PICT2ELUADIR" "/tmp/pict2e-lua/")
 
 -- «.Plot2D»	(to "Plot2D")
 

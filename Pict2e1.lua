@@ -10,7 +10,7 @@
 -- Author: Eduardo Ochs <eduardoochs@gmail.com>
 
 -- First version: 2022apr11
--- This version:  2022apr12
+-- This version:  2022apr18
 --
 -- Pict2e1: generate code for Pict2e using
 -- Prads (printable algebraic datatypes).
@@ -23,10 +23,22 @@
 -- (defun ab () (interactive) (find-2b '(a) '(b)))
 -- (defun et () (interactive) (find-angg "LATEX/2022pict2e.tex"))
 -- (defun eb () (interactive) (find-angg "LATEX/2022pict2e-body.tex"))
--- (defun o  () (interactive) (find-angg "LATEX/2022pict2e.lua"))
+-- (defun ao () (interactive) (find-angg "LATEX/2022pict2e.lua"))
 -- (defun v  () (interactive) (find-pdftools-page "~/LATEX/2022pict2e.pdf"))
 -- (defun tb () (interactive) (find-ebuffer (eepitch-target-buffer)))
 -- (defun etv () (interactive) (find-wset "13o2_o_o" '(tb) '(v)))
+-- (setenv "PICT2ELUADIR" "~/LATEX/")
+--
+-- (code-c-d "pict2elua" "/tmp/pict2e-lua/" :anchor)
+-- (defun a  () (interactive) (find-pict2elua "Pict2e1.lua"))
+-- (defun b  () (interactive) (find-pict2elua "Pict2e1-1.lua"))
+-- (defun ab () (interactive) (find-2b '(a) '(b)))
+-- (defun et () (interactive) (find-pict2elua "2022pict2e.tex"))
+-- (defun eb () (interactive) (find-pict2elua "2022pict2e-body.tex"))
+-- (defun v  () (interactive) (find-pdftools-page "/tmp/pict2e-lua/2022pict2e.pdf"))
+-- (defun tb () (interactive) (find-ebuffer (eepitch-target-buffer)))
+-- (defun etv () (interactive) (find-wset "13o2_o_o" '(tb) '(v)))
+-- (setenv "PICT2ELUADIR" "/tmp/pict2e-lua/")
 
 -- «.Prads»			(to "Prads")
 -- «.PradOutput»		(to "PradOutput")
@@ -64,9 +76,7 @@
 
 
 
--- loaddednat6()
--- require "Prad1"      -- (find-angg "LUA/Prad1.lua")
-
+require "edrxlib"
 
 
 --  ____                _     
@@ -481,6 +491,8 @@ e = PradSub  {b="BEGIN", e="END", "ee", d, "eee"}
 -- Show a chunk of tex code by saving it to 2022pict2e-body.tex,
 -- latexing 2022pict2e.tex, and displaying the resulting PDF.
 
+show_dir = os.getenv("PICT2ELUADIR") or "~/LATEX/"
+
 Show = Class {
   type = "Show",
   new  = function (o) return Show {bigstr = tostring(o)} end,
@@ -492,8 +504,8 @@ Show = Class {
       return format("Show: %s => %s", test.fname_body, test.success or "?")
     end,
   __index = {
-    fname_body  = "~/LATEX/2022pict2e-body.tex",
-    fname_tex   = "~/LATEX/2022pict2e.tex",
+    fname_body  = show_dir.."2022pict2e-body.tex",
+    fname_tex   = show_dir.."2022pict2e.tex",
     --        (find-LATEX "2022pict2e.tex")
     --
     write = function (test)
@@ -501,7 +513,8 @@ Show = Class {
         return test
       end,
     cmd = function (test)
-        local cmd = "cd ~/LATEX/ && lualatex "..test.fname_tex.." < /dev/null"
+        local cmd = "cd "..show_dir..
+                " && pdflatex "..test.fname_tex.." < /dev/null"
         return cmd
       end,
     compile = function (test)

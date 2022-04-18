@@ -1,0 +1,76 @@
+% (find-LATEX "2022pict2e.tex")
+% (defun c () (interactive) (find-LATEXsh "lualatex -record 2022pict2e.tex" :end))
+% (defun C () (interactive) (find-LATEXSH "lualatex 2022pict2e.tex" "Success!!!"))
+% (defun D () (interactive) (find-pdf-page      "~/LATEX/2022pict2e.pdf"))
+% (defun d () (interactive) (find-pdftools-page "~/LATEX/2022pict2e.pdf"))
+% (defun b () (interactive) (find-LATEX "2022pict2e-body.tex"))
+% (defun e () (interactive) (find-LATEX "2022pict2e.tex"))
+% (defun l () (interactive) (find-LATEX "2022pict2e.lua"))
+% (defun u () (interactive) (find-latex-upload-links "2022pict2e"))
+% (defun v () (interactive) (find-2a '(e) '(d)))
+% (defun cv () (interactive) (C) (ee-kill-this-buffer) (v) (g))
+% (defun d0 () (interactive) (find-ebuffer "2022pict2e.pdf"))
+%          (code-eec-LATEX "2022pict2e")
+% (find-pdf-page   "~/LATEX/2022pict2e.pdf")
+% (find-sh0 "cp -v  ~/LATEX/2022pict2e.pdf /tmp/")
+% (find-sh0 "cp -v  ~/LATEX/2022pict2e.pdf /tmp/pen/")
+%   file:///home/edrx/LATEX/2022pict2e.pdf
+%               file:///tmp/2022pict2e.pdf
+%           file:///tmp/pen/2022pict2e.pdf
+% http://angg.twu.net/LATEX/2022pict2e.pdf
+% (find-LATEX "2019.mk")
+% (find-lualatex-links "2022pict2e")
+
+\documentclass[oneside,12pt]{article}
+%\usepackage[colorlinks,citecolor=DarkRed,urlcolor=DarkRed]{hyperref} % (find-es "tex" "hyperref")
+%\usepackage{amsmath}
+%\usepackage{amsfonts}
+%\usepackage{amssymb}
+\usepackage{pict2e}
+\usepackage[x11names,svgnames]{xcolor} % (find-es "tex" "xcolor")
+\usepackage{colorweb}                 % (find-es "tex" "colorweb")
+%\usepackage{tikz}
+%
+\usepackage{edrx21}               % (find-LATEX "edrx21.sty")
+\input edrxaccents.tex            % (find-LATEX "edrxaccents.tex")
+\input edrx21chars.tex            % (find-LATEX "edrx21chars.tex")
+%\input edrxheadfoot.tex          % (find-LATEX "edrxheadfoot.tex")
+%\input edrxgac2.tex              % (find-LATEX "edrxgac2.tex")
+%
+% (find-es "tex" "geometry")
+\usepackage[paperwidth=148mm, paperheight=88mm, %a6paper, landscape,
+            %paperwidth=148mm, paperheight=105mm, %a6paper, landscape,
+            top=1.5cm, bottom=.25cm, left=1cm, right=1cm, includefoot
+           ]{geometry}
+%
+\begin{document}
+
+% \catcode`\^^J=10
+% \directlua{dofile "dednat6load.lua"}  % (find-LATEX "dednat6load.lua")
+% %L dofile "2022pict2e.lua"           -- (find-LATEX "2022pict2e.lua")
+% \pu
+
+\unitlength=10pt
+\def\closeddot{\circle*{0.3}}
+\def\opendot  {\circle*{0.3}\color{white}\circle*{0.2}}
+
+% From: (find-dn6 "preamble6.lua" "preamble1")
+\newlength{\celllower}
+\newlength{\lcelllower}
+\def\cellfont{}
+\def\lcellfont{}
+\def\cell #1{\lower\celllower\hbox to 0pt{\hss\cellfont${#1}$\hss}}
+\def\lcell#1{\lower\celllower\hbox to 0pt   {\lcellfont${#1}$\hss}}
+
+\input 2022pict2e-body.tex            % (find-LATEX "2022pict2e-body.tex")
+
+\GenericWarning{Success:}{Success!!!}  % Used by `M-x cv'
+
+\end{document}
+
+
+% Local Variables:
+% coding: utf-8-unix
+% ee-tla: "p22t"
+% End:
+
