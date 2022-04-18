@@ -1,1 +1,122 @@
-a
+# This file:
+#   https://github.com/edrx/pict2e-lua/
+#       http://angg.twu.net/pict2e-lua/README.org.html
+#       http://angg.twu.net/pict2e-lua/README.org
+#               (find-angg "pict2e-lua/README.org")
+#               (find-angg "pict2e-lua/")
+# Author: Eduardo Ochs <eduardoochs@gmail.com>
+# 
+# Some eev-isms:
+# (defun c  () (interactive) (eek "C-c C-e h h"))
+# (defun o  () (interactive) (find-angg "pict2e-lua/README.org"))
+# (defun v  () (interactive) (brg     "~/pict2e-lua/README.html"))
+# (defun cv () (interactive) (c) (v))
+# (defun m  () (interactive) (magit-status "~/pict2e-lua/"))
+# 
+# (require 'ox-md)
+# (org-md-export-to-markdown)
+# (org-html-export-to-html)
+# 
+# (find-mygitrepo-links "pict2e-lua")
+# (find-orgnode "Table of Contents")
+#+OPTIONS: toc:nil num:nil
+#+OPTIONS: org-html-postamble:nil
+
+#+begin_comment
+ (eepitch-shell)
+ (eepitch-kill)
+ (eepitch-shell)
+cd ~/pict2e-lua/
+laf
+rm -v *~
+rm -v *.html
+
+# (find-fline   "~/pict2e-lua/")
+# (magit-status "~/pict2e-lua/")
+# (find-gitk    "~/pict2e-lua/")
+#
+#   (s)tage all changes
+#   (c)ommit -> (c)reate
+#   (P)ush -> (p)ushremote
+#   https://github.com/edrx/pict2e-lua
+#
+#+end_comment
+
+
+#+TITLE: Pict2e-lua: a Lua library that generates Pict2e code
+
+* Introduction
+
+# https://github.com/edrx/emlua/#introduction
+# (find-angg "emlua/README.org")
+# (find-TH "2022eev-svg")
+# (find-TH "dednat6")
+# (find-angg "LUA/Pict2e1.lua" "Pict2e-methods")
+# (find-angg "LUA/Pict2e1.lua" "PictBounds-methods")
+# (find-angg "LUA/Pict2e1.lua" "Show")
+
+This is a Lua library that I am using to draw complex drawings in
+LaTeX. It is a rewrite of some old modules that I wrote for [[http://angg.twu.net/dednat6/tug-slides.pdf][dednat6]];
+these old modules could generate figures for Calculus (like [[http://angg.twu.net/2022eev-svg.html][these
+ones]]) and for Heyting Algebras (like the ones [[http://angg.twu.net/math-b.html#zhas-for-children-2][here]]) using [[https://ctan.org/pkg/pict2e?lang=en][pict2e]] as
+the back-end - my laptop is quite slow, so I prefer to use pict2e
+instead of Tikz.
+
+These old modules for Dednat6 were hard to use - I had to control by
+hand the order of some nested blocks and indentation of the generated
+code - so I decided to rewrite them using better classes. You can see
+some nice methods of these new classes [[http://angg.twu.net/LUA/Pict2e1.lua.html#Pict2e-methods][here]] and [[http://angg.twu.net/LUA/Pict2e1.lua.html#PictBounds-methods][here]], but the nicest
+thing of my Pict2e objects is that they can call methods from the [[http://angg.twu.net/LUA/Pict2e1.lua.html#Show][Show]]
+class to save their LaTeX code to a file, compile the .tex file, and
+report if the compilation went well - and if the compilation worked we
+can make Emacs display the PDF by typing a single key. See the
+screenshot below:
+
+@@html:<a href="2022agda-mode-prop.png"><IMG SRC="2022agda-mode-prop-small.png"></a>@@
+
+Future versions of this package will support [[https://github.com/edrx/emlua/#introduction][emlua]], and use it to make
+Emacs display the new PDF as sson as it gets ready; and they will also
+support generating both pict2e and [[http://angg.twu.net/2022eev-svg.html][SVG]]. Recompiling the .tex file and
+displaying the new PDF takes 6 seconds in my machine, but displaying a
+new SVG should take less than 0.5 seconds...
+
+...but /this/ version is made to be very easy to test, and to have
+very few dependencies. You only need Emacs 28 or more recent, with the
+packages [[http://angg.twu.net/#eev][eev]] (from [[https://elpa.gnu.org/packages/eev.html][ELPA]]) and [[http://elpa.nongnu.org/nongnu/lua-mode.html][lua-mode]] and [[http://elpa.nongnu.org/nongnu/pdf-tools.html][pdf-tools]] (from [[https://elpa.nongnu.org/][NonGNU
+ELPA]]); you also need LaTeX and Lua5.1 - you can install them in Debian
+with:
+
+#+begin_src sh
+sudo apt-get install texlive-base lua5.1
+#+end_src
+
+
+
+#+begin_comment
+ (eepitch-shell)
+ (eepitch-kill)
+ (eepitch-shell)
+cp -iv ~/IMAGES/2022agda-mode-prop.png .
+cp -iv ~/IMAGES/2022agda-mode-prop-small.png .
+cp -v  ~/LUA/Pict2e1.lua   .
+cp -v  ~/LUA/Pict2e1-1.lua .
+cp -v  ~/LUA/lua50init.lua edrxlib.lua
+
+laf
+git add README.org README.html README.md
+git add Pict2e1.lua Pict2e1-1.lua edrxlib.lua
+git add 2022agda-mode-prop.png
+git add 2022agda-mode-prop-small.png
+git add .gitignore
+
+#+end_comment
+
+
+
+
+# Local Variables:
+# coding:               utf-8-unix
+# modes:                (org-mode fundamental-mode)
+# org-html-postamble:   nil
+# End:
+
