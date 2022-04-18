@@ -131,8 +131,8 @@ cd      /tmp/pict2e-lua/
 git clone https://github.com/edrx/pict2e-lua .
 
 # (code-c-d "pict2elua" "/tmp/pict2e-lua/" :anchor)
-# (find-pict2elua "Pict2e1.lua"))
-# (find-pict2elua "Pict2e1-1.lua"))
+# (find-pict2elua "Pict2e1.lua")
+# (find-pict2elua "Pict2e1-1.lua")
 
 #+end_comment
 

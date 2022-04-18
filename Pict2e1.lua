@@ -157,7 +157,7 @@ PradOutput = Class {
  (eepitch-lua51)
  (eepitch-kill)
  (eepitch-lua51)
-dofile "Prad1.lua"
+dofile "Pict2e1.lua"
 
 po = PradOutput({
   "abcd{%\n",
@@ -200,7 +200,7 @@ PradContext = Class {
  (eepitch-lua51)
  (eepitch-kill)
  (eepitch-lua51)
-dofile "Prad1.lua"
+dofile "Pict2e1.lua"
 
 = PradContext.new()
 = PradContext.new():copyindent()
@@ -312,7 +312,7 @@ PradStruct = Class {
  (eepitch-lua51)
  (eepitch-kill)
  (eepitch-lua51)
-dofile "Prad1.lua"
+dofile "Pict2e1.lua"
 a =          {b="BB", e="EE", "a", "aa", 42}
 b = PradSub  {b="BB", e="EE", "a", "aa", 42}
 c = PradList {b, 333, {"foo", 200}}
@@ -441,7 +441,7 @@ PradSub = PradClass.from {
  (eepitch-lua51)
  (eepitch-kill)
  (eepitch-lua51)
-dofile "Prad1.lua"
+dofile "Pict2e1.lua"
 a = PradList {"aa", "aaa"}
 b = PradList {"bb", a, "bbb"}
 c = PradSub  {"cc", "ccc"}
@@ -514,7 +514,7 @@ Show = Class {
       end,
     cmd = function (test)
         local cmd = "cd "..show_dir..
-                " && pdflatex "..test.fname_tex.." < /dev/null"
+                " && lualatex "..test.fname_tex.." < /dev/null"
         return cmd
       end,
     compile = function (test)
@@ -667,13 +667,13 @@ pts = Points2 {v(1,2), v(3,4), v(5,2)}
 = pts:Line()
 = pts:rev()
 = pts:add(pts:rev())
-= pts:add(pts:rev()):region("red")     -- broken
+-- = pts:add(pts:rev()):region("red")     -- broken
 
 = pts:polygon()
-= pts:polygon():bshow()                -- broken
+-- = pts:polygon():bshow()                -- broken
  (etv)
 = pts:Line()
-= pts:Line():bshow()
+-- = pts:Line():bshow()                   -- broken
  (etv)
 
 --]]
@@ -740,12 +740,10 @@ f = function (ang, len)
   end
 = f(0, 2)
 
-p = Pict2e.bounds(v(0,0), v(5,4)):grid():axesandticks()
--- for i=0,2,1/8 do p:add(f(i*math.pi, i)) end
--- for i=0,1,1/8 do p:add(f(i*math.pi, i)) end
-for i=0,1/2,1/8 do p:add(f(i*math.pi, i)) end
+p = Pict2e.bounds(v(0,0), v(5,4)):grid():axesandticks() -- broken
+for i=0,1/2,1/8 do p:add(f(i*math.pi, i)) end           -- broken
 = p
-= p:bep():show()
+-- = p:bep():show() -- broken
  (etv)
 
 --]]
