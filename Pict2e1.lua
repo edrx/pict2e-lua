@@ -2,15 +2,10 @@
 --     http://angg.twu.net/LUA/Pict2e1.lua.html
 --     http://angg.twu.net/LUA/Pict2e1.lua
 --             (find-angg "LUA/Pict2e1.lua")
---   http://angg.twu.net/LATEX/Pict2e1.lua.html
---   http://angg.twu.net/LATEX/Pict2e1.lua
---           (find-angg "LATEX/Pict2e1.lua")
---       (find-tkdiff   "~/LUA/Pict2e1.lua" "~/LATEX/Pict2e1.lua")
---      (find-sh0 "cp -v ~/LUA/Pict2e1.lua   ~/LATEX/Pict2e1.lua")
+--    See: http://angg.twu.net/pict2e-lua.html
 -- Author: Eduardo Ochs <eduardoochs@gmail.com>
-
 -- First version: 2022apr11
--- This version:  2022apr18
+-- This version:  2022apr19
 --
 -- Pict2e1: generate code for Pict2e using
 -- Prads (printable algebraic datatypes).
@@ -901,11 +896,11 @@ PradClass.__index.addregion0 = function (pis, ...)
     return pis:addobj(pts:region0())
   end
 
-PradClass.__index.bshow0 = function (p)
-    return p:pgat("pgat"):dd():tostringp()
+PradClass.__index.bshow0 = function (p, str)
+    return p:pgat(str or "pgat"):dd():tostringp()
   end
-PradClass.__index.bshow = function (p)
-    return Show.try(p:bshow0())
+PradClass.__index.bshow = function (p, str)
+    return Show.try(p:bshow0(str))
   end
 
 -- «Pict2e-methods-tests»  (to ".Pict2e-methods-tests")

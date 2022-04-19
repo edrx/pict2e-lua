@@ -2,14 +2,9 @@
 --     http://angg.twu.net/LUA/Pict2e1-1.lua.html
 --     http://angg.twu.net/LUA/Pict2e1-1.lua
 --             (find-angg "LUA/Pict2e1-1.lua")
---   http://angg.twu.net/LATEX/Pict2e1-1.lua.html
---   http://angg.twu.net/LATEX/Pict2e1-1.lua
---           (find-angg "LATEX/Pict2e1-1.lua")
---       (find-tkdiff   "~/LUA/Pict2e1-1.lua" "~/LATEX/Pict2e1-1.lua")
---      (find-sh0 "cp -v ~/LUA/Pict2e1-1.lua   ~/LATEX/Pict2e1-1.lua")
---
+--    See: http://angg.twu.net/pict2e-lua.html
 -- Author: Eduardo Ochs <eduardoochs@gmail.com>
--- Version: 2022apr18
+-- Version: 2022apr19
 --
 -- Tests for Pict2e1.lua that use functions that don't need to be in
 -- the core.
@@ -39,6 +34,8 @@
 -- «.Plot2D»		(to "Plot2D")
 -- «.Plot2D-test1»	(to "Plot2D-test1")
 -- «.Plot2D-test2»	(to "Plot2D-test2")
+-- «.Node»		(to "Node")
+-- «.Nodes»		(to "Nodes")
 
 require "Pict2e1"      -- (find-angg "LUA/Pict2e1.lua")
 
@@ -163,20 +160,78 @@ p = PictList {
 
 
 
+-- «Node»  (to ".Node")
+--
+Node = Class {
+  type  = "Node",
+  from  = function (x, y, tag, linkto, tex)
+      return Node {x=x, y=y, tag=tag, linkto=linkto, tex=tex}
+    end,
+  __tostring = function (nd) return mytostringpv(nd) end,
+  __index = {
+    xy = function (nd) return v(nd.x, nd.y) end,
+    totex = function (nd)
+        return pformat("\\putnode%s{%s}", nd:xy(), nd.tex or nd.tag)
+      end,
+  },
+}
+
+-- «Nodes»  (to ".Nodes")
+--
+Nodes = Class {
+  type = "Nodes",
+  new  = function () return Nodes {_={}} end,
+  __tostring = function (nds)
+      return mapconcat(mytostringp, nds._, "\n")
+    end,
+  __index = {
+    add = function (nds, x, y, tag, tex, linkto)
+        local n = #(nds._)+1
+        local node = Node {x=x, y=y, n=n, tag=tag, tex=tex, linkto=linkto}
+        nds._[n]   = node
+        nds._[tag] = node
+        return nds
+      end,
+    nodestotex = function (nds)
+        local f = function (nd) return nd:totex() end
+        return PictList(map(f, nds._))
+      end,
+    linkstotex = function (nds)
+        local p = PictList {}
+        for i,nd1 in ipairs(nds._) do
+          if nd1.linkto then
+            local nd2 = nds._[nd1.linkto]
+            p:addline(nd1:xy(), nd2:xy())
+          end
+        end
+        return p
+      end,
+    totex = function (nds)
+        return PictList {nds:linkstotex(), nds:nodestotex()}
+      end,
+  },
+}
 
 
+--[[
+ (eepitch-lua51)
+ (eepitch-kill)
+ (eepitch-lua51)
+dofile "Pict2e1-1.lua"
+nds = Nodes.new()
+nds:add(0, 0, "a", nil, "+")
+nds:add(1, 1, "+", nil, nil)
+nds:add(2, 0, "b", nil, "+")
+= nds
+PPP(nds)
+= nds:nodestotex()
+= nds:linkstotex()
 
+= nds._[1]
+= nds._[1]:totex()
+= nds:totex()
 
-
-
-
-
-
-
-
-
-
-
+--]]
 
 
 --[==[
@@ -185,50 +240,13 @@ p = PictList {
  (eepitch-lua51)
 dofile "Pict2e1-1.lua"
 
-from("t => _R(t)", seq(0, 2*pi, pi/64)):toline():Color("Red"):bshow()
-
-= myplot("_Q(t)", "Green") 
-= myplot("_Q(t)", "Green"):bshow()
-p = PictList {
-    myplot("_P(t)", "Red"),
-    myplot("_Q(t)", "Orange"),
-    myplot("_R(t)", "Green")
-  }
-= p
-p:bshow()
- (etv)
-
-= Plot2D.from("t => _R(t)", seq(0, 2*pi, pi/64)):toline():Color("Red"):bshow()
-
---]==]
-
-
-
---[==[
- (eepitch-lua51)
- (eepitch-kill)
- (eepitch-lua51)
-dofile "Pict2e1-1.lua"
 Show.preamble = [[
   \unitlength=25pt
-  \celllower=3pt
-  \def\nodesize{0.9}
-  \def\nodecolor{AntiqueWhite1}
-  \def\nodecolor{Orange!50!white}
-  \def\nodeify#1{%
-      {\color{\nodecolor}\circle*{\nodesize}}%
-      \circle{\nodesize}%
-      \cell{#1}%
-    }
-  \def\putnode(#1,#2)#3{\put(#1,#2){\nodeify{#3}}}
   \def\Sone{[\mathrm{S1}]}
   \def\Stwo{[\mathrm{S2}]}
 ]]
 
-nodes = { }
-
 Pict2e.bounds = PictBounds.new(v(-1,-1), v(4,4))
-
 
 p = PictList {
   [[ \Line(0,0)(3,3) ]],
@@ -241,12 +259,25 @@ p = PictList {
 }
 = p:bshow()
  (etv)
+= p:bshow("p")
+ (etv)
 
-PradClass.__index.bshow0 = function (p)
-    -- return p:pgat("pgat"):dd():tostringp()
-    return p:pgat("p"):dd():tostringp()
-  end
-= p:bshow()
+nds = Nodes.new()
+nds:add(0, 0, "a", nil, "+")
+nds:add(1, 1, "+", nil, nil)
+nds:add(2, 0, "b", nil, "+")
+= nds
+= nds:totex()
+= nds:totex():bshow()
+ (etv)
+
+Pict2e.bounds = PictBounds.new(v(0,0), v(2,1), 0.5)
+
+Show.preamble = [[
+  \unitlength=35pt
+  \def\nodesize{0.7}
+]]
+= nds:totex():bshow()
  (etv)
 
 --]==]
