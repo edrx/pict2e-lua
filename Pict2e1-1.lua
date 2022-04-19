@@ -36,7 +36,9 @@
 -- (defun etv () (interactive) (find-wset "13o2_o_o" '(tb) '(v)))
 -- (setenv "PICT2ELUADIR" "/tmp/pict2e-lua/")
 
--- «.Plot2D»	(to "Plot2D")
+-- «.Plot2D»		(to "Plot2D")
+-- «.Plot2D-test1»	(to "Plot2D-test1")
+-- «.Plot2D-test2»	(to "Plot2D-test2")
 
 require "Pict2e1"      -- (find-angg "LUA/Pict2e1.lua")
 
@@ -96,6 +98,7 @@ Plot2D = Class {
   },
 }
 
+-- «Plot2D-test1»  (to ".Plot2D-test1")
 --[==[
  (eepitch-lua51)
  (eepitch-kill)
@@ -115,9 +118,8 @@ dofile "Pict2e1-1.lua"
 
 
 
+-- «Plot2D-test2»  (to ".Plot2D-test2")
 --[==[
--- (find-pdf-page "~/2022.1-C3/C3-quadros.pdf" 5)
-
  (eepitch-lua51)
  (eepitch-kill)
  (eepitch-lua51)

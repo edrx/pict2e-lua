@@ -10,6 +10,7 @@
 # Some eev-isms:
 # (defun c  () (interactive) (eek "C-c C-e h h"))
 # (defun o  () (interactive) (find-angg "pict2e-lua/README.org"))
+# (defun bl () (interactive) (find-TH   "pict2e-lua"))
 # (defun v  () (interactive) (brg     "~/pict2e-lua/README.html"))
 # (defun cv () (interactive) (c) (v))
 # (defun m  () (interactive) (magit-status "~/pict2e-lua/"))

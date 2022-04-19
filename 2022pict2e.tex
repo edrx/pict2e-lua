@@ -1,4 +1,13 @@
-% (find-LATEX "2022pict2e.tex")
+% This file:
+%   http://angg.twu.net/LATEX/2022pict2e.tex.html
+%   http://angg.twu.net/LATEX/2022pict2e.tex
+%           (find-angg "LATEX/2022pict2e.tex")
+% Author: Eduardo Ochs <eduardoochs@gmail.com>
+% Version: 2022apr18
+% Public domain.
+%
+% This is used by: (find-angg "LUA/Pict2e1.lua" "Show")
+%
 % (defun c () (interactive) (find-LATEXsh "lualatex -record 2022pict2e.tex" :end))
 % (defun C () (interactive) (find-LATEXSH "lualatex 2022pict2e.tex" "Success!!!"))
 % (defun D () (interactive) (find-pdf-page      "~/LATEX/2022pict2e.pdf"))
@@ -20,6 +29,8 @@
 % http://angg.twu.net/LATEX/2022pict2e.pdf
 % (find-LATEX "2019.mk")
 % (find-lualatex-links "2022pict2e")
+%
+% «.load-body»	(to "load-body")
 
 \documentclass[oneside,12pt]{article}
 %\usepackage[colorlinks,citecolor=DarkRed,urlcolor=DarkRed]{hyperref} % (find-es "tex" "hyperref")
@@ -28,7 +39,7 @@
 %\usepackage{amssymb}
 \usepackage{pict2e}
 \usepackage[x11names,svgnames]{xcolor} % (find-es "tex" "xcolor")
-\usepackage{colorweb}                 % (find-es "tex" "colorweb")
+\usepackage{colorweb}                  % (find-es "tex" "colorweb")
 %\usepackage{tikz}
 %
 \usepackage{edrx21}               % (find-LATEX "edrx21.sty")
@@ -62,6 +73,7 @@
 \def\cell #1{\lower\celllower\hbox to 0pt{\hss\cellfont${#1}$\hss}}
 \def\lcell#1{\lower\celllower\hbox to 0pt   {\lcellfont${#1}$\hss}}
 
+% «load-body»  (to ".load-body")
 \input 2022pict2e-body.tex            % (find-LATEX "2022pict2e-body.tex")
 
 \GenericWarning{Success:}{Success!!!}  % Used by `M-x cv'

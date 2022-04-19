@@ -490,6 +490,8 @@ e = PradSub  {b="BEGIN", e="END", "ee", d, "eee"}
 -- «Show»  (to ".Show")
 -- Show a chunk of tex code by saving it to 2022pict2e-body.tex,
 -- latexing 2022pict2e.tex, and displaying the resulting PDF.
+-- See: (find-LATEX "2022pict2e.tex")
+--      (find-LATEX "2022pict2e.tex" "load-body")
 
 show_dir = os.getenv("PICT2ELUADIR") or "~/LATEX/"
 
@@ -506,7 +508,7 @@ Show = Class {
   __index = {
     fname_body  = show_dir.."2022pict2e-body.tex",
     fname_tex   = show_dir.."2022pict2e.tex",
-    --        (find-LATEX "2022pict2e.tex")
+    --          (find-LATEX "2022pict2e.tex" "load-body")
     --
     write = function (test)
         ee_writefile(test.fname_body, test.bigstr)
@@ -662,18 +664,25 @@ Points2 = Class {
  (eepitch-kill)
  (eepitch-lua51)
 dofile "Pict2e1.lua"
-pts = Points2 {v(1,2), v(3,4), v(5,2)}
+pts = Points2 {v(1,2), v(3,4), v(3,1)}
 = pts
 = pts:Line()
 = pts:rev()
 = pts:add(pts:rev())
--- = pts:add(pts:rev()):region("red")     -- broken
+pts = Points2 {v(1,2), v(3,4), v(3,1)}
 
-= pts:polygon()
--- = pts:polygon():bshow()                -- broken
- (etv)
+PPP(pts:Line())
+Points2.__index.pict2e = function (pts, prefix)
+    return PictList { prefix..tostring(pts) }
+  end
+PPP(pts:Line())
 = pts:Line()
--- = pts:Line():bshow()                   -- broken
+= pts:Line():bshow()
+ (etv)
+= pts:polygon()
+= pts:polygon():bshow()
+ (etv)
+= pts:region0():bshow()
  (etv)
 
 --]]
@@ -739,11 +748,12 @@ f = function (ang, len)
     return Pict2eVector.fromwalk(x0y0, v(math.cos(ang),math.sin(ang))*len)
   end
 = f(0, 2)
+PPP(f(0, 2))
 
-p = Pict2e.bounds(v(0,0), v(5,4)):grid():axesandticks() -- broken
-for i=0,1/2,1/8 do p:add(f(i*math.pi, i)) end           -- broken
+p = PictList{}
+for i=0,1.5,1/8 do p:addobj(f(i*math.pi, i*2)) end
 = p
--- = p:bep():show() -- broken
+= p:bshow()
  (etv)
 
 --]]
