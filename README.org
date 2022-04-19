@@ -82,16 +82,13 @@ support generating both pict2e and [[http://angg.twu.net/2022eev-svg.html][SVG]]
 displaying the new PDF takes 6 seconds in my machine, but displaying a
 new SVG should take less than 0.5 seconds...
 
-...but /this/ version is made to be very easy to test, and to have
-very few dependencies. You only need Emacs 28 or more recent, with the
-packages [[http://angg.twu.net/#eev][eev]] (from [[https://elpa.gnu.org/packages/eev.html][ELPA]]) and [[http://elpa.nongnu.org/nongnu/lua-mode.html][lua-mode]] and [[http://elpa.nongnu.org/nongnu/pdf-tools.html][pdf-tools]] (from [[https://elpa.nongnu.org/][NonGNU
-ELPA]]); you also need LaTeX and Lua5.1 - you can install them in Debian
-with:
+...but /this/ version is made to be very easy to test. To be honest,
+this library is /not interesting in itself/ - but I think that it is
+quite interesting as an example of a library that is being developed
+using [[http://angg.twu.net/emacsconf2021.html][test blocks]], and that can be installed and tested using test
+blocks. This is explained, with detailed instructions, here:
 
-#+begin_src sh
-sudo apt-get install texlive-base lua5.1
-#+end_src
-
+http://angg.twu.net/pict2e-lua.html
 
 
 #+begin_comment
