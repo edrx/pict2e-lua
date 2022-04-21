@@ -5,7 +5,7 @@
 --    See: http://angg.twu.net/pict2e-lua.html
 -- Author: Eduardo Ochs <eduardoochs@gmail.com>
 -- First version: 2022apr11
--- This version:  2022apr19
+-- This version:  2022apr21
 --
 -- Pict2e1: generate code for Pict2e using
 -- Prads (printable algebraic datatypes).
@@ -732,7 +732,7 @@ Pict2eVector = Class {
 }
 
 -- «Pict2eVector-tests»  (to ".Pict2eVector-tests")
---[[
+--[==[
  (eepitch-lua51)
  (eepitch-kill)
  (eepitch-lua51)
@@ -751,7 +751,17 @@ for i=0,1.5,1/8 do p:addobj(f(i*math.pi, i*2)) end
 = p:bshow()
  (etv)
 
---]]
+r = Pict2e.region0(v(0,0), v(2,0), v(0,2))
+q = PictList {
+    r:color("red")  :putat(v(1, 1)),
+    r:color("orange"):putat(v(1, 2)),
+    p
+  }
+= q 
+= q:bshow()
+ (etv)
+
+--]==]
 
 
 
@@ -871,6 +881,11 @@ PradClass.__index.bhbox = function (pis)
   end
 PradClass.__index.myvcenter = function (pis)
     local b = "\\myvcenter{"
+    local e = "}"
+    return PradSub({b=b, pis, e=e})
+  end
+PradClass.__index.putat = function (pis, xy)
+    local b = pformat("\\put%s{", xy)
     local e = "}"
     return PradSub({b=b, pis, e=e})
   end
